@@ -2,7 +2,7 @@ import datetime as dt
 import matplotlib.pyplot as plt
 from matplotlib import style
 import pandas as pd
-import pandas_datareader.data as web
+import pandas_datareader as pdr
 
 
 def test_zero():
@@ -13,16 +13,17 @@ def test_last():
     print('THE END.')
 
 
-def test_tsla_yahoo():
+def test_tsla_download():
     style.use('ggplot')
     start = dt.datetime(2000, 1, 1)
     end = dt.datetime(2012, 12, 31)
-    df = web.DataReader('TSLA', 'google', start, end)
-    print(df.tail(6))
+    df = pdr.get_data_google('TSLA')
+    df.to_csv('../tsla.csv')
+    print(df.head(6))
 
 
 if __name__ == '__main__':
     test_zero()
-    test_tsla_yahoo()
+    test_tsla_download()
 
     test_last()
