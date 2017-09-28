@@ -41,7 +41,7 @@ def test_sells():
     ticker_for_sell = []
     ticker_for_buy = []
     count_positions = 1066
-    count_relevant = count_positions / 2
+    count_relevant = count_positions // 2
     for ticker in tickers_clear:
         if ticker['1'] > count_relevant
             ticker_for_buy.append(ticker)
