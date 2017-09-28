@@ -25,13 +25,31 @@ def do_ml(ticker):
                             ('rfor', RandomForestClassifier())])
     clf.fit(X_train, y_train)
     confidence = clf.score(X_test, y_test)
-    print('Accuracy ', confidence)
+    # print('{} Accuracy {}'.format(ticker, confidence))
     predictions = clf.predict(X_test)
-    print('Predicted spread: ', Counter(predictions))
-    return confidence
+    print('{} Predicted spread: {}'.format(ticker, Counter(predictions)))
+    return Counter(predictions)
+
+
+def test_sells():
+    with open('../sp500tickers.pickle', 'rb') as f:
+        tickers = pickle.load(f)
+    tickers_clear = []
+    for ticker in tickers[:20]:
+        ml_responce = do_ml(ticker)
+        tickers_clear.append({'ticker': ticker, '0': ml_responce[0], '1': ml_responce[1], '-1': ml_responce[-1]})
+    ticker_for_sell = []
+    ticker_for_buy = []
+    for ticker in tickers_clear:
+        if ticker['1'] > ticker['0'] and ticker['1'] > ticker['-1']:
+            ticker_for_buy.append(ticker)
+        if ticker['-1'] > ticker['0'] and ticker['-1'] > ticker['1']:
+            ticker_for_sell.append(ticker)
+    print('Tickets for BUY: {}'.format(ticker_for_buy))
+    print('Tickets for SELL: {}'.format(ticker_for_sell))
 
 
 if __name__ == '__main__':
     test_zero()
-    do_ml('BAC')
+    test_sells()
     test_last()

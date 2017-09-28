@@ -13,7 +13,7 @@ def test_last():
 
 def buy_sell_hold(*args):
     cols = [c for c in args]
-    requirement = 0.1
+    requirement = 0.05
     for col in cols:
         if col > requirement:
             return 1

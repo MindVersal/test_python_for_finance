@@ -28,7 +28,7 @@ def extract_featuresets(ticker):
                                               ))
     vals = df['{}_target'.format(ticker)].values.tolist()
     str_vals = [str(i) for i in vals]
-    print('Data spread: ', Counter(str_vals))
+    # print('Data spread: ', Counter(str_vals))
     df.fillna(0, inplace=True)
     df = df.replace([np.inf, -np.inf], np.nan)
     df.dropna(inplace=True)
