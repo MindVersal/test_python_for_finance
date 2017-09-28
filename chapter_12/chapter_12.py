@@ -35,7 +35,7 @@ def test_sells():
     with open('../sp500tickers.pickle', 'rb') as f:
         tickers = pickle.load(f)
     tickers_clear = []
-    for ticker in tickers[:20]:
+    for ticker in tickers:
         ml_responce = do_ml(ticker)
         tickers_clear.append({'ticker': ticker, '0': ml_responce[0], '1': ml_responce[1], '-1': ml_responce[-1]})
     ticker_for_sell = []
@@ -43,7 +43,7 @@ def test_sells():
     count_positions = 1066
     count_relevant = count_positions // 2
     for ticker in tickers_clear:
-        if ticker['1'] > count_relevant
+        if ticker['1'] > count_relevant:
             ticker_for_buy.append(ticker)
         if ticker['-1'] > count_relevant:
             ticker_for_sell.append(ticker)
