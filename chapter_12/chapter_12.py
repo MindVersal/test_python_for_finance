@@ -40,10 +40,12 @@ def test_sells():
         tickers_clear.append({'ticker': ticker, '0': ml_responce[0], '1': ml_responce[1], '-1': ml_responce[-1]})
     ticker_for_sell = []
     ticker_for_buy = []
+    count_positions = 1066
+    count_relevant = count_positions / 2
     for ticker in tickers_clear:
-        if ticker['1'] > ticker['0'] and ticker['1'] > ticker['-1']:
+        if ticker['1'] > count_relevant
             ticker_for_buy.append(ticker)
-        if ticker['-1'] > ticker['0'] and ticker['-1'] > ticker['1']:
+        if ticker['-1'] > count_relevant:
             ticker_for_sell.append(ticker)
     print('Tickets for BUY: {}'.format(ticker_for_buy))
     print('Tickets for SELL: {}'.format(ticker_for_sell))
