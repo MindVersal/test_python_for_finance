@@ -17,8 +17,11 @@ def test_save_sp500_tickers():
     soup = bs.BeautifulSoup(resp.text, 'lxml')
     table = soup.find('table', {'class': 'wikitable sortable'})
     tickers = []
+    un_tickers = ('BRK.B', 'BF.B')
     for row in table.findAll('tr')[1:]:
         ticker = row.findAll('td')[0].text
+        if ticker in un_tickers:
+            continue
         tickers.append(ticker)
     with open('../sp500tickers.pickle', 'wb') as f:
         pickle.dump(tickers, f)
@@ -36,6 +39,6 @@ def test_load_from_quandl():
 
 if __name__ == '__main__':
     test_zero()
-    # test_save_sp500_tickers()
-    test_load_from_quandl()
+    test_save_sp500_tickers()
+    # test_load_from_quandl()
     test_last()
