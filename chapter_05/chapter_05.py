@@ -1,7 +1,8 @@
 import bs4 as bs
 import pickle
 import requests
-
+import quandl
+import datetime as dt
 
 def test_zero():
     print('Chapter 05')
@@ -25,7 +26,16 @@ def test_save_sp500_tickers():
     return tickers
 
 
+def test_load_from_quandl():
+    quandl.ApiConfig.api_key = 'BcPAXwup9YZoTCZsDAhx'
+    start = dt.datetime(2010, 1, 1)
+    end = dt.datetime(2012, 12, 31)
+    tsla_prices = quandl.get('WIKI/TSLA', start_date=start, end_date=end)
+    print(tsla_prices[['Open', 'Close', 'Volume']])
+
+
 if __name__ == '__main__':
     test_zero()
-    test_save_sp500_tickers()
+    # test_save_sp500_tickers()
+    test_load_from_quandl()
     test_last()
